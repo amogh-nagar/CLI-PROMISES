@@ -2,13 +2,16 @@ const { info } = require('console');
 const http = require('http');
 const Customer = require('./models/customer');
 
-
-
 const addcustomer = (customer1) => {
   const customer = new Customer(customer1);
-  customer.save().then((x) => {
-    console.info('New customer added');
-  });
+  customer
+    .save()
+    // .then((x) => {
+    //   console.info('New customer added');
+    // })
+    // .catch((err) => {
+    //   console.info('Some error occurred');
+    // });
 };
 
 const findcustomer = (id) => {
@@ -19,9 +22,9 @@ const findcustomer = (id) => {
   });
 };
 
-const updatecustomer = ( customer) => {
+const updatecustomer = (customer) => {
   Customer.update(
-    { id:customer.id, name: customer.name, email: customer.email },
+    { id: customer.id, name: customer.name, email: customer.email },
     (customer) => {
       if (!customer) {
         console.info('Not found!');
@@ -33,7 +36,6 @@ const updatecustomer = ( customer) => {
 };
 
 const deletecustomer = (obj) => {
-    
   Customer.remove(obj.id, (message) => {
     console.info(message);
   });
